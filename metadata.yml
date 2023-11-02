@@ -1,0 +1,29 @@
+# Fill out all team + team member details below by replacing the content of the
+# respective strings. This file is parsed by our autograding software, so ensure
+# that you only replace the placeholder text, not the keys (e.g. TeamName, etc.)
+
+# 1. Your team's GitHub repository URL for project 2 (*not* project 1)
+RepoURL: https://github.com/COMP30019/project-2-cube-masters
+
+# 2. Since you are working in the same team for project 2, you should copy the
+#    below keys/values *verbatim* from your project 1 metadata.yml -- do not
+#    change them unless you have permission from the teaching team.
+TeamName: Cube Masters
+TeamMembers:
+  - Name: Rohit Sandeep Ambakkat
+    Email: rsandeepamba@student.unimelb.edu.au
+  - Name: Yiran Liu
+    Email: yirliu4@student.unimelb.edu.au
+  - Name: Thaya Chevaphatrakul
+    Email: tchevaphatra@student.unimelb.edu.au
+
+# 3. The below keys must be filled out by the given milestone deadlines, and
+#    you must also re-submit on Gradescope to register these changes officially
+#    (like in project 1). Read the specification for details.
+
+# Milestone 1 entries
+GameTitle: Lunala and the Celestial Tower
+GameBlurb: Lunala and the Celestial Tower is a hack and slash RPG where players play as Lunala, bounded by a pact with the Moon lord attempting to ascend the Celestial Tower. Within the game, players can utilize a variety of abilities granted to them by Lunala's pact with the moon lord to determine their playstyle all in an attempt to conquer the Celestial Tower and free her people. Players will need to skillfully utilize these abilities and mechanics offered to them and assist Lunala in overcoming each floor of the celestial tower to become stronger and face the notorious Moon Lord. 
+
+# Milestone 2 entries
+GameplayVideo: https://www.youtube.com/watch?v=JVK-w56KUMI
