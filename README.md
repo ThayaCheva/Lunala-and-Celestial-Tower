@@ -1,8 +1,8 @@
-<h1> Basic Overview </h1>
+<h1> Links </h1>
 
-Theme: 5 Minute Survival
+- Video Overview: https://www.youtube.com/watch?v=JVK-w56KUMI
 
-Video Overview: (https://www.youtube.com/watch?v=JVK-w56KUMI)
+- Live Game: https://comp30019.github.io/project-2-cube-masters/
 
 <h1> Game Design Document </h1>
 ### Table of contents
