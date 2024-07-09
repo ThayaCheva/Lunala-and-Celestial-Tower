@@ -1,10 +1,8 @@
-<h1>Video Overview</h1>
+<h1> Video Overview </h1>
 
-<a href="https://www.youtube.com/watch?v=JVK-w56KUMI">
-  <img src="https://img.youtube.com/vi/JVK-w56KUMI/0.jpg" width="1200" height="800" alt="Lunala-and-Celestial_Tower">
-</a>
+[![Lunala-and-Celestial_Tower](https://img.youtube.com/vi/JVK-w56KUMI/0.jpg)](https://www.youtube.com/watch?v=JVK-w56KUMI)
+
 <h1> Game Design Document </h1>
-
 ### Table of contents
 
 - [Game Overview](#game-overview)
