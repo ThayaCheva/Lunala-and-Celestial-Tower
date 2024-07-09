@@ -1,6 +1,8 @@
-<h1> Video Overview </h1>
+<h1> Basic Overview </h1>
 
-[![Lunala-and-Celestial_Tower](https://img.youtube.com/vi/JVK-w56KUMI/0.jpg)](https://www.youtube.com/watch?v=JVK-w56KUMI)
+Theme: 5 Minute Survival
+
+Video Overview: (https://www.youtube.com/watch?v=JVK-w56KUMI)
 
 <h1> Game Design Document </h1>
 ### Table of contents
@@ -44,9 +46,9 @@ The target audience for our game is likely to be individuals that are aged 12+ a
 
 **Unique Selling Points**
 
-- Difficulty - Typically in games players are free to retreat from combat or a viable strategy can be to dodge for some time for players to recollect themselves and avoid a loss. However, in our game, we have decided to be much more punishing as players have to constantly engage with the game as not getting kills drains health which can lead to the end of a run through the celestial tower. As such we introduced a unique risk/reward system if players attempt to avoid fighting for too long or spend a large amount of time dodging they can be in a disadvantaged state when they enter combat again.
+- Difficulty: Typically in games players are free to retreat from combat or a viable strategy can be to dodge for some time for players to recollect themselves and avoid a loss. However, in our game, we have decided to be much more punishing as players have to constantly engage with the game as not getting kills drains health which can lead to the end of a run through the celestial tower. As such we introduced a unique risk/reward system if players attempt to avoid fighting for too long or spend a large amount of time dodging they can be in a disadvantaged state when they enter combat again.
 
-- Replayability - Within our game, there are many abilities each with it's own upgrade trees that players can select from which encourages replayability, exploration, and new strategies to be crafted. As such players can play through the game again and attempt to try out a new playstyle by trying different upgrades for Lunala to complete the game in perhaps a more efficient manner or even make it more challenging. As the levels vary between runs it can also offer replayability for players as they can get new experiences when playing again.
+- Replayability: Within our game, there are many abilities each with it's own upgrade trees that players can select from which encourages replayability, exploration, and new strategies to be crafted. As such players can play through the game again and attempt to try out a new playstyle by trying different upgrades for Lunala to complete the game in perhaps a more efficient manner or even make it more challenging. As the levels vary between runs it can also offer replayability for players as they can get new experiences when playing again.
 
 - Unique Levels: Within our game, each of the levels can impose some form of an effect on the player and enemies which will allow for unique variations in the gameplay between levels. The combination of enemies will also vary between levels. It will challenge players to adapt their gameplay strategy and their utilization of the mechanics offered.
 
@@ -73,9 +75,9 @@ Within the game, there is only one playable character that is Lunala who is our 
 </p>
 <p align= "center"> Fig 3. Sketch of Lunala </p>
 
-- Moon Lord
-_ Background: A tyrannical sorcerer who rules over Lunala and her people using his celestial power. As a sorcerer of the moon, the Moon Lord is more fearsome during the night than during the day and he is most powerful during a Blood Moon. However, a Blood Moon is a rare phenomenon and as time goes on his ambitions become greater and so does his desire for power and influence. Thus the Moon Lord commands his servants to build the Celestial Tower which grants him the power to conquer the Sun and create a world of eternal Blood Moon where only he reigns supreme.
-_ Personality: The Moon Lord is an evil and ruthless overlord who will do anything to complete his goals
+- Moon Lord:
+    - Background: A tyrannical sorcerer who rules over Lunala and her people using his celestial power. As a sorcerer of the moon, the Moon Lord is more fearsome during the night than during the day and he is most powerful during a Blood Moon. However, a Blood Moon is a rare phenomenon and as time goes on his ambitions become greater and so does his desire for power and influence. Thus the Moon Lord commands his servants to build the Celestial Tower which grants him the power to conquer the Sun and create a world of eternal Blood Moon where only he reigns supreme. 
+    - Personality: The Moon Lord is an evil and ruthless overlord who will do anything to complete his goals
  <p align="center">
     <img src="Images/Moon_Lord_Sketch.png" width=300>
 </p>
@@ -198,7 +200,7 @@ The game is going to be a pixel game and it will be captured on screen in 2.5D. 
 </p>
 <p align= "center"> Fig 13. Boss Floor Design  </p>
 
-- Level Design : The game has 4 unique levels that serves different purposes. Each level has a gate where the player can enter to progress to the next level. However, the circumstances in which the gate appears varies. Everytime the player enters a new level, unique modifiers and enemy spawns will be assigned to that level.
+- Level Design: The game has 4 unique levels that serves different purposes. Each level has a gate where the player can enter to progress to the next level. However, the circumstances in which the gate appears varies. Everytime the player enters a new level, unique modifiers and enemy spawns will be assigned to that level.
 
   - Floor 0: This would act as a tutorial level which occurs at the base of the celestial tower. The player controls Lunala and is introduced to basic movement controls, abilities and, an upgrade system. The level serves as a tutorial to teach players basic gameplay and mechanics.
 
