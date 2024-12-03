@@ -11,6 +11,9 @@ public class TreeManager : MonoBehaviour
     public TextMeshProUGUI unlockCountText;
     public int unlockCount = 0;
     public int maxUnlock;
+    public GameObject starParticles;
+
+    private CursorManager cursorManager;
 
     [HideInInspector] public bool lanceUnlock1 = false;
     [HideInInspector] public float lanceUnlock1_level = 0;
@@ -41,6 +44,8 @@ public class TreeManager : MonoBehaviour
     // Update is called once per frame
     void Awake() {
         instance = this;
+        cursorManager = GameObject.Find("Cursor Manager").GetComponent<CursorManager>();
+        starParticles.SetActive(false);
     }
 
     void Update()
@@ -49,13 +54,18 @@ public class TreeManager : MonoBehaviour
             skillMenu.enabled = !skillMenu.enabled;
             if (skillMenu.enabled) {
                 Time.timeScale = 0;
+                starParticles.SetActive(true);
+                cursorManager.ResetCursor();
             }
             else {
                 Time.timeScale = 1;
+                starParticles.SetActive(false);
+                cursorManager.SetCombatCursor();
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             skillMenu.enabled = false;
+            starParticles.SetActive(false);
             Time.timeScale = 1;
         }
         unlockCountText.text = unlockCount + "/" + maxUnlock + " Upgrades Unlocked";

@@ -40,7 +40,6 @@ public class BossController : MonoBehaviour
 
     //Booleans for managing behavior 
     public bool canDamage = true;
-    private bool targetting=false;
     private bool takingDamage=false;
     private bool isRight;
     public bool isStun=false;
@@ -117,7 +116,7 @@ public class BossController : MonoBehaviour
             currHealth -= damage * AbilitiesManager.instance.damageMultiplier;
 
             var damageNumbers=Instantiate(damagePopup,new Vector3(transform.position.x, 1.5f, transform.position.z),Quaternion.identity);
-            damageIndicator indicator= damageNumbers.GetComponent<damageIndicator>();
+            DamageIndicator indicator= damageNumbers.GetComponent<DamageIndicator>();
             indicator.indicateDamage(damage*AbilitiesManager.instance.damageMultiplier);
 
             FindObjectOfType<SoundManager>().Play("Enemy Hit");
@@ -129,12 +128,37 @@ public class BossController : MonoBehaviour
 
             if(currHealth <= 0){
                 isDead = true;
-                // if(LunalaController.instance.currenthealth + maxHealth > LunalaController.instance.maxHealth){
-                //     LunalaController.instance.currenthealth = LunalaController.instance.maxHealth;
-                // }
-                // else{
-                //     LunalaController.instance.currenthealth += healthReturn;
-                // }
+                FindObjectOfType<SoundManager>().Play("Boss Death");
+                Instantiate(shardPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
+                gameObject.transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                StartCoroutine(ClearGame());
+            }
+            else{
+                anim.SetTrigger("hurt");
+            }
+        }
+        takingDamage=false;
+    }
+
+    public void takeMeleeDamage(float damage){
+        Vector3 LunalaPosition= LunalaController.instance.transform.position;
+        takingDamage=true;
+        if (!isDead) {  
+            currHealth -= damage * AbilitiesManager.instance.damageMultiplier;
+
+            var damageNumbers=Instantiate(damagePopup,new Vector3(transform.position.x, 1.5f, transform.position.z),Quaternion.identity);
+            DamageIndicator indicator= damageNumbers.GetComponent<DamageIndicator>();
+            indicator.indicateDamage(damage*AbilitiesManager.instance.damageMultiplier);
+
+            FindObjectOfType<SoundManager>().Play("Enemy Hit");
+            GameObject hitEffect = Instantiate(hitPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
+            if (!isRight) {
+                hitEffect.transform.localScale = new Vector3(-2, 2, 2);
+            }
+            Destroy(hitEffect, 0.5f);
+
+            if(currHealth <= 0){
+                isDead = true;
                 FindObjectOfType<SoundManager>().Play("Boss Death");
                 Instantiate(shardPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
                 gameObject.transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().enabled = false;

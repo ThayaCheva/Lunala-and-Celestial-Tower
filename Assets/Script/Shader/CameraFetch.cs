@@ -11,7 +11,9 @@ public class CameraFetch : MonoBehaviour
     {
         // get distance from current pixel to the camera
         cam = GetComponent<Camera>();
-        cam.depthTextureMode = DepthTextureMode.Depth;
+        if (cam != null) {
+            cam.depthTextureMode = DepthTextureMode.Depth;
+        }
     }
 
     void Update()

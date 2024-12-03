@@ -17,14 +17,17 @@ public class Dialogue : MonoBehaviour
 
     private int index;
 
+    private CursorManager cursorManager;
+
     // Start is called before the first frame update
     void Start()
     {
         floorText.SetActive(false);
         if((SceneManager.GetActiveScene().name == "Level3")){
-                BossSpawner.instance.enabled=false;
+            BossSpawner.instance.enabled=false;
         }
         LunalaController.instance.enabled = false;
+        cursorManager = GameObject.Find("Cursor Manager").GetComponent<CursorManager>();
         text.text = string.Empty;
         StartDialogue();
     }
@@ -49,6 +52,8 @@ public class Dialogue : MonoBehaviour
     }
 
     IEnumerator TypeLine() {
+        Debug.Log(cursorManager);
+        cursorManager.ResetCursor();
         foreach (char c in lines[index].ToCharArray()) {
             text.text += c;
             if (c != ' ') {
@@ -69,6 +74,7 @@ public class Dialogue : MonoBehaviour
             if((SceneManager.GetActiveScene().name == "Level3")){
                 BossSpawner.instance.enabled=true;
             }
+            cursorManager.SetCombatCursor();
             gameObject.SetActive(false);
             portrait.gameObject.SetActive(false);
             floorText.SetActive(true);

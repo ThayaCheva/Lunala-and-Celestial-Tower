@@ -13,7 +13,7 @@ public class FireProjectile : MonoBehaviour
 
     public void FireProjectileInAnimation() {
         if (enemy != null) {
-            StartCoroutine(enemy.GetComponent<Enemy2Controller>().fireProjectile());
+            StartCoroutine(enemy.GetComponent<WizardController>().fireProjectile());
         }
     }
 }

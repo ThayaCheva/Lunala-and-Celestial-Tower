@@ -1564,6 +1564,7 @@ MonoBehaviour:
     m_Bits: 16
   crosshair: {fileID: 95939840}
   firePosition: {fileID: 1426749827}
+  offset: {x: 0, y: 0, z: 0}
   hitPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &377696006
 GameObject:

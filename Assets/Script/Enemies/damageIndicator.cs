@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class damageIndicator : MonoBehaviour
+public class DamageIndicator : MonoBehaviour
 {
     private TextMeshPro textMesh;
     [SerializeField] private float disappearTime;
@@ -20,10 +20,10 @@ public class damageIndicator : MonoBehaviour
     }
     
     public void Update(){
-        float upwardSpeed=0.5f;
+        float upwardSpeed = 0.5f;
         transform.position += new Vector3(0,upwardSpeed,0) * Time.deltaTime;
-        disappearTime-=Time.deltaTime;
-        if(disappearTime<=0){
+        disappearTime -= Time.deltaTime;
+        if(disappearTime <= 0){
             StartCoroutine(fade());
             Destroy(gameObject);
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy2Hurt : StateMachineBehaviour
+public class WizardHurt : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -10,7 +10,7 @@ public class enemy2Hurt : StateMachineBehaviour
         GameObject enemySprite= animator.gameObject;
        Transform parent= enemySprite.transform.parent;
        GameObject enemy= parent.gameObject;
-       var EnemyController= enemy.GetComponent<Enemy2Controller>();
+       var EnemyController= enemy.GetComponent<WizardController>();
        EnemyController.isStun=true;
     }
 
@@ -25,7 +25,7 @@ public class enemy2Hurt : StateMachineBehaviour
        GameObject enemySprite= animator.gameObject;
        Transform parent= enemySprite.transform.parent;
        GameObject enemy= parent.gameObject;
-       var EnemyController= parent.GetComponent<Enemy2Controller>();
+       var EnemyController= parent.GetComponent<WizardController>();
        EnemyController.isStun=false;
 
     }

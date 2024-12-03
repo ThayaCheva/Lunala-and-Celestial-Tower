@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class ReaperAttack : MonoBehaviour
 {
 
     // Altered code from https://www.youtube.com/watch?v=8rTK68omQow&t=5696s;
@@ -16,7 +16,6 @@ public class EnemyAttack : MonoBehaviour
         int levels=FindObjectOfType<ManageScene>().levelCount;
         if(levels > 1){
             meleeDamage += (levels-1) * 3;
-            Debug.Log(meleeDamage);
         }
     }
 

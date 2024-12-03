@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 
-public class Enemy2Controller : MonoBehaviour
+public class WizardController : MonoBehaviour
 { 
  // Start is called before the first frame update
     [SerializeField] public float maxHealth;
@@ -22,10 +22,8 @@ public class Enemy2Controller : MonoBehaviour
     public GameObject shardPrefab;
     public UnityEngine.AI.NavMeshAgent navigation;
 
-    public static Enemy2Controller instance;
-    
-
-    //private GameObject target;
+    [SerializeField] private float knockbackForce = 2.5f;
+    [SerializeField] private float knockbackDuration = 0.2f;
 
     //Constantly Changing Values 
     private Vector3 target;
@@ -44,11 +42,9 @@ public class Enemy2Controller : MonoBehaviour
 
     // Start is called before the first frame update
     private void Awake() {
-        instance = this;
-        int levels=FindObjectOfType<ManageScene>().levelCount;
-        if(levels>1){
-            maxHealth+=(levels-1)*4;
-
+        int levels = FindObjectOfType<ManageScene>().levelCount;
+        if(levels > 1){
+            maxHealth += (levels - 1) * 4;
         }
     }
 
@@ -63,7 +59,7 @@ public class Enemy2Controller : MonoBehaviour
     void Update()
     {
         if (!isDead) {
-            destinationTime+=Time.deltaTime;
+            destinationTime += Time.deltaTime;
             if(!targetting && !isStun){
                 if(Vector3.Distance(this.transform.position,LunalaController.instance.transform.position)<=range){
                     targetting=true;
@@ -136,46 +132,157 @@ public class Enemy2Controller : MonoBehaviour
         }
     }
 
-     public void takeDamage(float damage){
-        Vector3 LunalaPosition= LunalaController.instance.transform.position;
-        takingDamage=true;
-        if (!isDead) {
+    public void takeDamage(float damage)
+    {
+        takingDamage = true;
+
+        if (!isDead)
+        {
+            // Apply damage to current health
             currHealth -= damage * AbilitiesManager.instance.damageMultiplier;
 
-            var damageNumbers=Instantiate(damagePopup,new Vector3(transform.position.x, 1.5f, transform.position.z),Quaternion.identity);
-            damageIndicator indicator= damageNumbers.GetComponent<damageIndicator>();
-            indicator.indicateDamage(damage*AbilitiesManager.instance.damageMultiplier);
+            // Display damage numbers
+            ShowDamageNumbers(damage);
 
-            FindObjectOfType<SoundManager>().Play("Enemy Hit");
-            GameObject hitEffect = Instantiate(hitPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
-            if (!isRight) {
-                hitEffect.transform.localScale = new Vector3(-2, 2, 2);
-            }
-            Destroy(hitEffect, 0.5f);
+            // Play hit effects
+            PlayHitEffects();
 
-            if(currHealth <= 0){
-                isDead = true;
-                // if(LunalaController.instance.currenthealth + maxHealth > LunalaController.instance.maxHealth){
-                //     LunalaController.instance.currenthealth = LunalaController.instance.maxHealth;
-                // }
-                // else{
-                //     LunalaController.instance.currenthealth += healthReturn;
-                // }
-                anim.SetTrigger("isDead");
-                FindObjectOfType<SoundManager>().Play("Enemy2 Death Sound");
-                Instantiate(shardPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
-                if (SceneManager.GetActiveScene().name == "Level3") {
-                    FindObjectOfType<WaveManager>().enemyDead(); 
-                    FindObjectOfType<WaveManager>().enemy2Dead(); 
-                }
-                Destroy(gameObject, 1.3f);  
+            // Apply knockback
+            StartCoroutine(Knockback());
+
+            // Check if health is below or equal to zero
+            if (currHealth <= 0)
+            {
+                HandleDeath();
             }
-            else {
-                 anim.SetTrigger("hurt");
+            else
+            {
+                anim.SetTrigger("hurt");
             }
         }
-        takingDamage=false;
+
+        takingDamage = false;
     }
+
+    public void takeMeleeDamage(float damage)
+    {
+        takingDamage = true;
+
+        if (!isDead)
+        {
+            // Apply damage to current health
+            currHealth -= damage * AbilitiesManager.instance.damageMultiplier;
+
+            // Display damage numbers
+            ShowDamageNumbers(damage);
+
+            // Play hit effects
+            PlayHitEffects();
+
+            // Apply knockback
+            StartCoroutine(KnockbackMelee());
+
+            // Check if health is below or equal to zero
+            if (currHealth <= 0)
+            {
+                HandleDeath();
+            }
+            else
+            {
+                anim.SetTrigger("hurt");
+            }
+        }
+
+        takingDamage = false;
+    }
+
+    // Coroutine to apply knockback effect
+    private IEnumerator KnockbackMelee()
+    {
+        float timer = 0;
+        float originalSpeed = navigation.speed;
+        navigation.speed = 0; // Stop navigation during knockback
+
+        // Determine knockback direction based on player's facing direction
+        Vector3 direction;
+        if (LunalaController.instance.transform.localScale.x < 0)
+        {
+            // Player is facing right, knockback left
+            direction = Vector3.left;
+        }
+        else
+        {
+            // Player is facing left, knockback right
+            direction = Vector3.right;
+        }
+
+        while (timer < knockbackDuration)
+        {
+            timer += Time.deltaTime;
+            navigation.Move(direction * knockbackForce * Time.deltaTime);
+            yield return null;
+        }
+        navigation.speed = originalSpeed; // Restore original speed
+    }
+
+    private IEnumerator Knockback()
+    {
+        float timer = 0;
+        float originalSpeed = navigation.speed;
+        navigation.speed = 0; // Stop navigation during knockback
+        while (timer < knockbackDuration)
+        {
+            timer += Time.deltaTime;
+            Vector3 direction = transform.position - target;
+            direction.y = 0; // Ignore vertical movement
+            direction.Normalize();
+            navigation.Move(direction * knockbackForce * Time.deltaTime);
+            yield return null;
+        }
+        navigation.speed = originalSpeed; // Restore original speed
+    }
+
+    // Display damage numbers above the enemy
+    private void ShowDamageNumbers(float damage)
+    {
+        var damageNumbers = Instantiate(damagePopup, new Vector3(transform.position.x, 1.5f, transform.position.z), Quaternion.identity);
+        DamageIndicator indicator = damageNumbers.GetComponent<DamageIndicator>();
+        indicator.indicateDamage(damage * AbilitiesManager.instance.damageMultiplier);
+    }
+
+    // Play hit sound and instantiate hit effect
+    private void PlayHitEffects()
+    {
+        FindObjectOfType<SoundManager>().Play("Enemy Hit");
+
+        GameObject hitEffect = Instantiate(hitPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
+
+        if (!isRight)
+        {
+            hitEffect.transform.localScale = new Vector3(-2, 2, 2);
+        }
+
+        Destroy(hitEffect, 0.5f);
+    }
+
+    // Handle death logic and effects
+    private void HandleDeath()
+    {
+        isDead = true;
+
+        anim.SetTrigger("isDead");
+        FindObjectOfType<SoundManager>().Play("Enemy2 Death Sound");
+        Instantiate(shardPrefab, new Vector3(transform.position.x, 1.0f, transform.position.z), Quaternion.identity);
+
+        if (SceneManager.GetActiveScene().name != "Level3")
+        {
+            FindObjectOfType<WaveManager>().enemyDead();
+            FindObjectOfType<WaveManager>().enemy2Dead();
+        }
+
+        Destroy(gameObject, 1.3f);
+    }
+
 
     public IEnumerator fireProjectile(){
         canDamage=false;

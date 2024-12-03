@@ -15,7 +15,7 @@ public class MeleeAttack : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         //EnemyController enemyController = col.gameObject.GetComponent<EnemyController>();
         if (col.gameObject.tag=="Enemy") {
-            col.SendMessage("takeDamage", meleeDamage * Modifiers.instance.selectedModifier.playerAttack);
+            col.SendMessage("takeMeleeDamage", meleeDamage * Modifiers.instance.selectedModifier.playerAttack);
         }
     }
 
